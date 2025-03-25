@@ -76,15 +76,15 @@
         # those are more easily expressed in perSystem.
         templates = {
           golang = {
-            path = ./templates/golang.nix;
+            path = ./templates/golang;
             description = "Golang flake";
           };
           python = {
-            path = ./templates/python.nix;
+            path = ./templates/python;
             description = "Python flake";
           };
           default = {
-            path = ./templates/default.nix;
+            path = ./templates/default;
             description = "Basic flake";
           };
         };
