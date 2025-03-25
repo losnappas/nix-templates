@@ -13,7 +13,7 @@
   };
 
   outputs =
-    inputs@{ flake-parts, self, ... }:
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         inputs.flake-root.flakeModule
@@ -88,7 +88,6 @@
             description = "Basic flake";
           };
         };
-        defaultTemplate = self.templates.default;
       };
     };
 }
