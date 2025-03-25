@@ -1,5 +1,6 @@
 import jinja2
 import os
+import shutil
 
 dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -200,7 +201,8 @@ if __name__ == "__main__":
     template_file = dir + "/flake.nix.templ"
 
     for context in templates:
-        output_file = f"{dir}/../templates/{context['name']}.nix"
-        generate_flake(template_file, output_file, context["variables"])
+        output_dir = f"{dir}/../templates/{context['name']}"
+        os.makedirs(output_dir, exist_ok=True)
+        generate_flake(template_file, f"{output_dir}/flake.nix", context["variables"])
 
-    print(f"Generated flake file: {output_file}")
+        print(f"Generated: {output_dir}")
