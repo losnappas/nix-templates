@@ -13,7 +13,7 @@
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, self, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         inputs.flake-root.flakeModule
@@ -75,11 +75,20 @@
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
         templates = {
-          golang = ./templates/golang.nix;
-          python = ./templates/python.nix;
-          default = ./templates/default.nix;
+          golang = {
+            path = ./templates/golang.nix;
+            description = "Golang flake";
+          };
+          python = {
+            path = ./templates/python.nix;
+            description = "Python flake";
+          };
+          default = {
+            path = ./templates/default.nix;
+            description = "Basic flake";
+          };
         };
-
+        defaultTemplate = self.templates.default;
       };
     };
 }
