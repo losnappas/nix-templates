@@ -145,10 +145,13 @@
             inputsFrom = [ config.flake-root.devShell ];
             packages = with pkgs; [
               nil
-            {{ devshell.packages | trim }}];
+              {{ devshell.packages | trim }}
+            ];
             env = {
-            {{ devshell.env | trim }}};
-{{ devshell.extraConfig | trim }}};
+              {{ devshell.env | trim }}
+            };
+            {{ devshell.extraConfig | trim }}
+          };
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
           # packages.default = pkgs.hello;
         };

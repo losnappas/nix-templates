@@ -166,7 +166,7 @@ templates = [
         "name": "python",
         "variables": {
             "treefmt": """
-            black.enable = true;
+            # black.enable = true;
             ruff-check.enable = true;
             ruff-format.enable = true;
             shfmt.enable = true;
@@ -174,11 +174,10 @@ templates = [
             "devshell": {
                 "packages": """
                 python3
-                python3.pkgs.poetry
                 python3.pkgs.python-lsp-server
                 python3.pkgs.pyls-isort
-                python3.pkgs.pyls-rope
-                python3.pkgs.pyls-mypy
+                python3.pkgs.pylsp-rope
+                python3.pkgs.pylsp-mypy
                 python3.pkgs.python-lsp-ruff
                 python3.pkgs.python-lsp-jsonrpc
                 python3.pkgs.pyflakes
@@ -188,6 +187,11 @@ templates = [
                 python3.pkgs.autopep8
                 python3.pkgs.yapf
                 python3.pkgs.pylint
+
+                # uv
+
+                # poetry
+
                 """,
                 "extraConfig": "",
                 "env": "",

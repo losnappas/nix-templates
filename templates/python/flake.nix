@@ -39,7 +39,7 @@
             inherit (config.flake-root) projectRootFile;
             programs = {
               nixfmt.enable = true;
-              black.enable = true;
+              # black.enable = true;
               ruff-check.enable = true;
               ruff-format.enable = true;
               shfmt.enable = true;
@@ -149,11 +149,10 @@
             packages = with pkgs; [
               nil
               python3
-              python3.pkgs.poetry
               python3.pkgs.python-lsp-server
               python3.pkgs.pyls-isort
-              python3.pkgs.pyls-rope
-              python3.pkgs.pyls-mypy
+              python3.pkgs.pylsp-rope
+              python3.pkgs.pylsp-mypy
               python3.pkgs.python-lsp-ruff
               python3.pkgs.python-lsp-jsonrpc
               python3.pkgs.pyflakes
@@ -163,9 +162,15 @@
               python3.pkgs.autopep8
               python3.pkgs.yapf
               python3.pkgs.pylint
+
+              # uv
+
+              # poetry
             ];
             env = {
+
             };
+
           };
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
           # packages.default = pkgs.hello;
