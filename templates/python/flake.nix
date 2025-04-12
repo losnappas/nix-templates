@@ -149,28 +149,35 @@
             packages = with pkgs; [
               nil
               python3
-              python3.pkgs.python-lsp-server
-              python3.pkgs.pyls-isort
-              python3.pkgs.pylsp-rope
-              python3.pkgs.pylsp-mypy
-              python3.pkgs.python-lsp-ruff
-              python3.pkgs.python-lsp-jsonrpc
-              python3.pkgs.pyflakes
-              python3.pkgs.mccabe
-              python3.pkgs.pycodestyle
-              python3.pkgs.pydocstyle
-              python3.pkgs.autopep8
-              python3.pkgs.yapf
-              python3.pkgs.pylint
-
-              # uv
-
+              uv
               # poetry
+
+              # python3.pkgs.python-lsp-server
+              # python3.pkgs.pyls-isort
+              # python3.pkgs.pylsp-rope
+              # python3.pkgs.pylsp-mypy
+              # python3.pkgs.python-lsp-ruff
+              # python3.pkgs.python-lsp-jsonrpc
+              # python3.pkgs.pyflakes
+              # python3.pkgs.mccabe
+              # python3.pkgs.pycodestyle
+              # python3.pkgs.pydocstyle
+              # python3.pkgs.autopep8
+              # python3.pkgs.yapf
+              # python3.pkgs.pylint
+
+              basedpyright
+              ruff
             ];
             env = {
-
+              UV_PYTHON_DOWNLOADS = "never";
+              UV_NO_MANAGED_PYTHON = "1";
             };
 
+            shellHook = ''
+              uv -q venv --allow-existing
+              source .venv/bin/activate
+            '';
           };
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
           # packages.default = pkgs.hello;
