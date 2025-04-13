@@ -172,11 +172,19 @@
             env = {
               UV_PYTHON_DOWNLOADS = "never";
               UV_NO_MANAGED_PYTHON = "1";
-            };
+              # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+              #   pkgs.stdenv.cc.cc.lib
+              # ];
+          };
 
             shellHook = ''
               uv -q venv --allow-existing
               source .venv/bin/activate
+
+              # Poetry:
+              # unset SOURCE_DATE_EPOCH
+              # poetry config virtualenvs.in-project true --local
+              # eval $(poetry env activate)
             '';
           };
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
