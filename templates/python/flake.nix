@@ -31,6 +31,11 @@
         }:
         {
 
+          # _module.args.pkgs = import inputs.nixpkgs {
+          #   inherit system;
+          #   config.allowUnfree = true;
+          # };
+
           # Per-system attributes can be defined here. The self' and inputs'
           # module parameters provide easy access to attributes of the same
           # system.
@@ -174,7 +179,13 @@
               UV_NO_MANAGED_PYTHON = "1";
               # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
               #   pkgs.stdenv.cc.cc.lib
+              #
+              #   # Cuda
+              #   pkgs.cudatoolkit
+              #   pkgs.cudaPackages.cudnn
+              #   "/run/opengl-driver"
               # ];
+              # CUDA_HOME = pkgs.cudatoolkit;
           };
 
             shellHook = ''
