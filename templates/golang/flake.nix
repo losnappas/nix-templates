@@ -25,6 +25,7 @@
           config,
           self',
           inputs',
+          lib,
           pkgs,
           system,
           ...
@@ -157,12 +158,22 @@
               gotests
             ];
             env = {
-
             };
-
           };
-          # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-          # packages.default = pkgs.hello;
+
+          packages.default = pkgs.buildGoModule {
+            pname = "program";
+            version = "1.0.0";
+            src = ./.;
+            vendorHash = lib.fakeHash;
+
+            # meta = with lib; {
+            #   description = "Description";
+            #   homepage = "";
+            #   license = licenses.unlicense;
+            # };
+          };
+
         };
       flake = {
         # The usual flake attributes can be defined here, including system-
