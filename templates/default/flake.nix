@@ -27,6 +27,7 @@
           inputs',
           pkgs,
           system,
+          lib,
           ...
         }:
         {
@@ -144,12 +145,11 @@
             inputsFrom = [ config.flake-root.devShell ];
             packages = with pkgs; [
               nil
-
             ];
+
             env = {
-
+              PROJECT_FORMATTER = lib.getExe self'.formatter;
             };
-
           };
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
           # packages.default = pkgs.hello;

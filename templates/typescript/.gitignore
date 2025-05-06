@@ -1,0 +1,25 @@
+node_modules/
+dist/
+build/
+out/
+
+# IDE/editor directories
+.vscode/
+.idea/
+*.sw?
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*~
+npm-debug.log*
+
+# Env
+.env*.local
+
+# Nix
+/result

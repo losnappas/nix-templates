@@ -25,17 +25,12 @@
           config,
           self',
           inputs',
+          lib,
           pkgs,
           system,
-          lib,
           ...
         }:
         {
-
-          # _module.args.pkgs = import inputs.nixpkgs {
-          #   inherit system;
-          #   config.allowUnfree = true;
-          # };
 
           # Per-system attributes can be defined here. The self' and inputs'
           # module parameters provide easy access to attributes of the same
@@ -45,10 +40,8 @@
             inherit (config.flake-root) projectRootFile;
             programs = {
               nixfmt.enable = true;
-              # black.enable = true;
-              ruff-check.enable = true;
-              ruff-format.enable = true;
-              shfmt.enable = true;
+              # biome.enable = true;
+              prettier.enable = true;
 
               # actionlint.enable = true;
               # alejandra.enable = true;
@@ -154,54 +147,26 @@
             inputsFrom = [ config.flake-root.devShell ];
             packages = with pkgs; [
               nil
-              python3
-              uv
-              # poetry
+              vtsls # ts language server
+              package-version-server
+              vscode-langservers-extracted
+              vscode-eslint
+              yaml-language-server
+              tailwindcss-language-server
 
-              # python3.pkgs.python-lsp-server
-              # python3.pkgs.pyls-isort
-              # python3.pkgs.pylsp-rope
-              # python3.pkgs.pylsp-mypy
-              # python3.pkgs.python-lsp-ruff
-              # python3.pkgs.python-lsp-jsonrpc
-              # python3.pkgs.pyflakes
-              # python3.pkgs.mccabe
-              # python3.pkgs.pycodestyle
-              # python3.pkgs.pydocstyle
-              # python3.pkgs.autopep8
-              # python3.pkgs.yapf
-              # python3.pkgs.pylint
+              # prettierd
 
-              basedpyright
-              ruff
+              # nodejs
+              # pnpm
+              bun
             ];
             env = {
               PROJECT_FORMATTER = lib.getExe self'.formatter;
-              UV_PYTHON_DOWNLOADS = "never";
-              UV_NO_MANAGED_PYTHON = "1";
-              # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-              #   pkgs.stdenv.cc.cc.lib
-              #
-              #   # Cuda
-              #   pkgs.cudatoolkit
-              #   pkgs.cudaPackages.cudnn
-              #   "/run/opengl-driver"
-              # ];
-              # CUDA_HOME = pkgs.cudatoolkit;
             };
-
-            shellHook = ''
-              uv -q venv --allow-existing
-              source .venv/bin/activate
-
-              # Poetry:
-              # unset SOURCE_DATE_EPOCH
-              # poetry config virtualenvs.in-project true --local
-              # eval $(poetry env activate)
-            '';
           };
-          # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-          # packages.default = pkgs.hello;
+
+          # packages.default =
+
         };
       flake = {
         # The usual flake attributes can be defined here, including system-

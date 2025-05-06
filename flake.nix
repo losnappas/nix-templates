@@ -27,6 +27,7 @@
           inputs',
           pkgs,
           system,
+          lib,
           ...
         }:
         {
@@ -57,6 +58,7 @@
               pkgs.python3.pkgs.python-lsp-server
             ];
             env = {
+              PROJECT_FORMATTER = lib.getExe self'.formatter;
               # LD_LIBRARY_PATH=pkgs.lib.makeLibraryPath [
               #   pkgs.stdenv.cc.cc.lib
               # ];

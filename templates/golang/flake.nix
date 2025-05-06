@@ -158,6 +158,7 @@
               gotests
             ];
             env = {
+              PROJECT_FORMATTER = lib.getExe self'.formatter;
             };
           };
 
