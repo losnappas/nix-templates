@@ -82,5 +82,8 @@ env*.local
 .mypy_cache/
 .dmypy.json
 
+# ruff
+.ruff_cache
+
 # Nix
 result/
