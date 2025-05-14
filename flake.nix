@@ -51,11 +51,6 @@
             inputsFrom = [ config.flake-root.devShell ];
             packages = [
               pkgs.nil
-              pkgs.just
-              pkgs.ruff
-              pkgs.python3
-              pkgs.python3.pkgs.jinja2
-              pkgs.python3.pkgs.python-lsp-server
             ];
             env = {
               PROJECT_FORMATTER = lib.getExe self'.formatter;
@@ -72,24 +67,22 @@
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
           # packages.default = pkgs.hello;
         };
-      flake = {
-        # The usual flake attributes can be defined here, including system-
-        # agnostic ones like nixosModule and system-enumerating ones, although
-        # those are more easily expressed in perSystem.
-        templates = {
-          golang = {
-            path = ./templates/golang;
-            description = "Golang flake";
-          };
-          python = {
-            path = ./templates/python;
-            description = "Python flake";
-          };
-          default = {
-            path = ./templates/default;
-            description = "Basic flake";
-          };
+      flake =
+        { lib, ... }:
+        {
+          # The usual flake attributes can be defined here, including system-
+          # agnostic ones like nixosModule and system-enumerating ones, although
+          # those are more easily expressed in perSystem.
+          templates =
+            let
+              templatesDir = ./templates;
+              entries = builtins.readDir templatesDir;
+              dirs = lib.filterAttrs (_: p: p == "directory") entries;
+            in
+            (lib.mapAttrs (name: _: {
+              path = "${templatesDir}/${name}";
+              description = "${name} flake template";
+            }) dirs);
         };
-      };
     };
 }
