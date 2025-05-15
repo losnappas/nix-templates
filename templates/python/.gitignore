@@ -54,6 +54,7 @@ coverage.xml
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
+.jupyter_ystore.db
 
 # IPython
 profile_default/
