@@ -150,7 +150,6 @@
               vtsls # ts language server
               package-version-server
               vscode-langservers-extracted
-              vscode-eslint
               yaml-language-server
               tailwindcss-language-server
 
