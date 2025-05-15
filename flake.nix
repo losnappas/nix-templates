@@ -39,10 +39,7 @@
           treefmt = {
             inherit (config.flake-root) projectRootFile;
             programs = {
-              black.enable = true;
-              just.enable = true;
               nixfmt.enable = true;
-              prettier.enable = true;
             };
           };
 
