@@ -38,17 +38,15 @@
             projectRootFile = "flake.nix";
             programs = {
               nixfmt.enable = true;
+              mdformat.enable = true;
             };
           };
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               nil
+              self'.formatter
             ];
-
-            env = {
-              PROJECT_FORMATTER = lib.getExe self'.formatter;
-            };
           };
 
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
